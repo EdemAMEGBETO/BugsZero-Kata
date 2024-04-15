@@ -90,7 +90,7 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		//
+		// Faire en sort de proposer de nouvelle question en fonction des categories
 		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.removeFirst());
 		if (currentCategory() == "Science")
@@ -103,7 +103,7 @@ public class Game {
 	
 	
 	private String currentCategory() {
-		//
+		// Renvoi de la categorie de question en fonction de la position du joueur
 		if (places[currentPlayer] == 0) return "Pop";
 		if (places[currentPlayer] == 4) return "Pop";
 		if (places[currentPlayer] == 8) return "Pop";
