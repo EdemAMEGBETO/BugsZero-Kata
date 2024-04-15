@@ -54,37 +54,43 @@ public class Game {
 	public void roll(int roll) {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
-		
+
+		// Si le joueur est sanctionné
 		if (inPenaltyBox[currentPlayer]) {
+			// Si son lancé est pair, on annule sa sanction
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true;
 				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
 				movePlayerAndAskQuestion(roll);
-			} else {
+			} else { // Sinon on maintien sa sanction
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
 				}
 			
 		} else {
-
+            // Si le joueur n'est pas sanctionné, on part dans movePlayerAndAskQuestion
 			movePlayerAndAskQuestion(roll);
 		}
 		
 	}
 
 	private void movePlayerAndAskQuestion(int roll) {
+		// La nouvelle position du joueur courant  est son ancienne postion augmenté du nombre de case correspondant au numero tiré
 		places[currentPlayer] = places[currentPlayer] + roll;
+		// Si sa position courante est supérieur à 11, on le ramène à la differrence de sa position - 12
 		if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 
 		System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + places[currentPlayer]);
 		System.out.println("The category is " + currentCategory());
+		// On lui pose une question en fonction de sa position
 		askQuestion();
 	}
 
 	private void askQuestion() {
+		//
 		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.removeFirst());
 		if (currentCategory() == "Science")
@@ -97,6 +103,7 @@ public class Game {
 	
 	
 	private String currentCategory() {
+		//
 		if (places[currentPlayer] == 0) return "Pop";
 		if (places[currentPlayer] == 4) return "Pop";
 		if (places[currentPlayer] == 8) return "Pop";
@@ -110,7 +117,9 @@ public class Game {
 	}
 
 	public boolean wasCorrectlyAnswered() {
+		// Si l'utilisateur courrant est sanctionné
 		if (inPenaltyBox[currentPlayer]){
+			// Si sa sanction annulé
 			if (isGettingOutOfPenaltyBox) {
 				System.out.println("Answer was correct!!!!");
 				currentPlayer++;
@@ -152,10 +161,10 @@ public class Game {
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
-		inPenaltyBox[currentPlayer] = true;
+		inPenaltyBox[currentPlayer] = true; // Sanction du joueur courant si mauvaise réponse
 		
-		currentPlayer++;
-		if (currentPlayer == players.size()) currentPlayer = 0;
+		currentPlayer++; // Passage au joueur suivant
+		if (currentPlayer == players.size()) currentPlayer = 0; // Lorsque tous les joueurs ont joués, on recommence le lancé !!
 		return true;
 	}
 

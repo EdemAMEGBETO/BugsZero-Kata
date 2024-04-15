@@ -18,19 +18,26 @@ public class GameRunner {
 	public static void playGame(Random rand) {
 		Game aGame = new Game();
 
+// Rajout de joueur (8joueurs)
 		aGame.add("Chet");
 		aGame.add("Pat");
 		aGame.add("Sue");
+		aGame.add("Jean");
+		aGame.add("mathieu");
+		aGame.add("Benoit");
+		aGame.add("Gile");
+		aGame.add("Boris");
+
 
 
 		do {
-
+// Lancer du Dé
 			aGame.roll(rand.nextInt(5) + 1);
-
+// Verification du chiffre afficher par le dé
 			if (rand.nextInt(9) == 7) {
-				notAWinner = aGame.wrongAnswer();
+				notAWinner = aGame.wrongAnswer(); // Mauvaise réponse
 			} else {
-				notAWinner = aGame.wasCorrectlyAnswered();
+				notAWinner = aGame.wasCorrectlyAnswered(); // Bonne réponse
 			}
 
 
